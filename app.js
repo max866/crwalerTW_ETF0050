@@ -11,7 +11,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 var fs = require('fs');
-
+var schedule = require('node-schedule');
 var url = 'https://tw.stock.yahoo.com/q/q?s=0050';
 var newData = [];
 var m = 1;
@@ -61,7 +61,10 @@ module.exports = () => {
   }
 }
 
-catchData();
-setInterval(catchData,60*60*1000);//60分鐘撈一次資料
+// catchData();
+// setInterval(catchData,60*60*1000);//60分鐘撈一次資料
 //setInterval(catchData,10000);//10sec撈一次資料
 
+schedule.scheduleJob('0 0 9-15 1-31 1-12 1-5', function(){
+    catchData();
+  });
