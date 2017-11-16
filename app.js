@@ -1,10 +1,13 @@
 /* 
+npm init
 npm install request --save
 npm install cheerio --save
-npm install icon-lite --save
+npm install iconv-lite --save
+npm install node-schedule --save
 執行方法為 json-server app.js
 自動產出ETF0050.json檔
 http://localhost:3000 可以看JSON API
+
  */
 
 var request = require('request');
@@ -14,7 +17,16 @@ var fs = require('fs');
 var schedule = require('node-schedule');
 var url = 'https://tw.stock.yahoo.com/q/q?s=0050';
 var newData = [];
-var m = 1;
+var nowTime = new Date(); 
+//判斷json檔案內是否為空決定m的起始值
+var jsonFile = fs.readFileSync(__dirname+'/ETF0050.json','utf8');
+var words = JSON.parse(jsonFile);
+if (words.length === 0){
+    m=1;
+}else{
+    m = words.length+1;
+}
+var n = nowTime.getFullYear()+'-'+nowTime.getMonth()+'-'+nowTime.getDate()+'_'+nowTime.getHours()+nowTime.getMinutes();
 
 var catchData = function() {
 // 取得網頁資料
@@ -44,8 +56,8 @@ request({ url , encoding: null //禁止使用預設編碼
             "最低":mydata[2][27].trim() 
    })
    m++;
-  
-  fs.writeFileSync(__dirname+"/ETF0050.json",JSON.stringify(newData,null,2));
+
+  fs.writeFileSync(__dirname+"/ETF0050"+n+".json",JSON.stringify(newData,null,2));
         }   
         else{
             console.log('錯誤：' + err);
