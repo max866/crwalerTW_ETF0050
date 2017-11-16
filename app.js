@@ -1,15 +1,3 @@
-/* 
-npm init
-npm install request --save
-npm install cheerio --save
-npm install iconv-lite --save
-npm install node-schedule --save
-執行方法為 json-server app.js
-自動產出ETF0050.json檔
-http://localhost:3000 可以看JSON API
-
- */
-
 var request = require('request');
 var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
@@ -18,15 +6,9 @@ var schedule = require('node-schedule');
 var url = 'https://tw.stock.yahoo.com/q/q?s=0050';
 var newData = [];
 var nowTime = new Date(); 
-//判斷json檔案內是否為空決定m的起始值
-var jsonFile = fs.readFileSync(__dirname+'/ETF0050.json','utf8');
-var words = JSON.parse(jsonFile);
-if (words.length === 0){
-    m=1;
-}else{
-    m = words.length+1;
-}
-var n = nowTime.getFullYear()+'-'+nowTime.getMonth()+'-'+nowTime.getDate()+'_'+nowTime.getHours()+nowTime.getMinutes();
+
+
+//var n = nowTime.getFullYear()+'-'+nowTime.getMonth()+'-'+nowTime.getDate();
 
 var catchData = function() {
 // 取得網頁資料
@@ -40,6 +22,14 @@ request({ url , encoding: null //禁止使用預設編碼
         $('tbody','tr').each(function(i,elem){
             mydata.push($(this).text().split('\n'));
         });
+        //判斷json檔案內是否為空決定m的起始值
+        var jsonFile = fs.readFileSync(__dirname + '/ETF0050.json', 'utf8');
+        var words = JSON.parse(jsonFile);
+        if (words.length === 0) {
+            m = 1;
+        } else {
+            m = words.length + 1;
+        }
         newData.push({ 
             "id":m, 
             "資料時間":mydata[1][23].trim(), //trim()去除字串中的空白
@@ -57,7 +47,7 @@ request({ url , encoding: null //禁止使用預設編碼
    })
    m++;
 
-  fs.writeFileSync(__dirname+"/ETF0050"+n+".json",JSON.stringify(newData,null,2));
+  fs.writeFileSync(__dirname+"/ETF0050.json",JSON.stringify(newData,null,2));
         }   
         else{
             console.log('錯誤：' + err);
