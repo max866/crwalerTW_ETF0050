@@ -67,6 +67,6 @@ module.exports = () => {
 // setInterval(catchData,60*60*1000);//60分鐘撈一次資料
 //setInterval(catchData,10000);//10sec撈一次資料
 
-schedule.scheduleJob('0 0 9-15 1-31 1-12 1-5', function(){
+schedule.scheduleJob('0 10 9-15 1-31 1-12 1-5', function(){
     catchData();
   });
