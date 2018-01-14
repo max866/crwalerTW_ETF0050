@@ -1,2 +1,5 @@
 node_modules/
+.vscode/
 ETF0050.json
+*.js
+*.map
