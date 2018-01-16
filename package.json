@@ -1,0 +1,26 @@
+{
+  "name": "crwaler_tw_etf0050",
+  "version": "1.0.0",
+  "description": "This project is about finance for crawl ETF 0050 Data in Taiwan",
+  "main": "app.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "iconv-lite": "^0.4.19",
+    "node-schedule": "^1.2.5",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/max866/crwalerTW_ETF0050.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/max866/crwalerTW_ETF0050/issues"
+  },
+  "homepage": "https://github.com/max866/crwalerTW_ETF0050#readme"
+}
