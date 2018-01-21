@@ -1,6 +1,6 @@
 import * as mongoose from "mongoose";
 
-const connection = mongoose.connect("mongodb://root:root@ds151207.mlab.com:51207/stock-crawler");
+const connection = mongoose.connect("mongodb://<account>:<password>@<hostname>:<port>/<db-Name>");
 let schemaStock = new mongoose.Schema({
   stockIndex: String,
   endedValue: Number,
